@@ -1,0 +1,24 @@
+[[main]]
+  name = 'الكتب'
+  pageRef = 'books'
+  weight = 10
+
+[[main]]
+  name = 'التصنيفات'
+  pageRef = 'categories'
+  weight = 20
+
+[[main]]
+  name = 'المدونة'
+  pageRef = 'posts'
+  weight = 30
+
+[[main]]
+  name = 'من نحن'
+  pageRef = 'about'
+  weight = 40
+
+[[main]]
+  name = 'تواصل معنا'
+  pageRef = 'contact'
+  weight = 50

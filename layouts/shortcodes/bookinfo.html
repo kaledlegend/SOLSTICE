@@ -1,0 +1,19 @@
+{{ $p := .Page.Params }}
+{{ $wa := site.Params.whatsapp }}
+<div class="book-info">
+  <div class="book-row">
+    {{ with $p.bookauthor }}<div><span>المؤلف</span><b>{{ . }}</b></div>{{ end }}
+    {{ with $p.condition }}<div><span>الحالة</span><b>{{ . }}</b></div>{{ end }}
+    {{ with $p.year }}<div><span>سنة الطباعة</span><b>{{ . }}</b></div>{{ end }}
+    {{ with $p.publisher }}<div><span>دار النشر</span><b>{{ . }}</b></div>{{ end }}
+  </div>
+  <div class="book-buy">
+    {{ if $p.price }}<div class="book-price">{{ $p.price }} <small>ريال</small></div>{{ end }}
+    {{ if $p.sold }}
+      <span class="book-sold">تم البيع</span>
+    {{ else if $wa }}
+      {{ $msg := printf "السلام عليكم، أبغى أطلب الكتاب: %s" $.Page.Title }}
+      <a class="book-btn" href="https://wa.me/{{ $wa }}?text={{ $msg | urlquery }}" target="_blank" rel="noopener">اطلب عبر واتساب</a>
+    {{ end }}
+  </div>
+</div>

@@ -1,0 +1,92 @@
+{{ $slides := .Params.slides }}
+<h1 class="hero-sr">{{ .Site.Title }}</h1>
+
+{{ if $slides }}
+<section class="hero-full" aria-label="{{ .Site.Title }}">
+  <div class="hero-track">
+    {{ range $i, $s := $slides }}
+      {{ with resources.GetMatch $s.image }}
+        {{ $img := .Fit "2000x1400 q80" }}
+        <div class="hero-slide{{ if eq $i 0 }} is-active{{ end }}">
+          <div class="hero-img" style="background-image: url('{{ $img.RelPermalink }}')"></div>
+          <div class="hero-cap">
+            <p class="hero-title">{{ $s.title }}</p>
+            {{ with $s.text }}<p class="hero-text">{{ . }}</p>{{ end }}
+            {{ with $s.link }}<a class="hero-btn" href="{{ . | relLangURL }}">{{ $s.button | default "استكشف" }}</a>{{ end }}
+          </div>
+        </div>
+      {{ else }}
+        <div class="hero-slide{{ if eq $i 0 }} is-active{{ end }}">
+          <div class="hero-cap">
+            <p class="hero-title">الصورة غير موجودة</p>
+            <p class="hero-text" style="direction:ltr;text-align:left">assets/{{ $s.image }}</p>
+          </div>
+        </div>
+      {{ end }}
+    {{ end }}
+  </div>
+  <div class="hero-dots"></div>
+  <a class="hero-down" href="#home-content" aria-label="انزل للأسفل">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+  </a>
+</section>
+{{ end }}
+
+<div id="home-content" class="home-content">
+  <div class="prose">
+    {{ .Content }}
+  </div>
+</div>
+
+<script>
+(function () {
+  var slides = document.querySelectorAll('.hero-slide');
+  var hero = document.querySelector('.hero-full');
+  var box = document.querySelector('.hero-dots');
+  if (!slides.length || !hero || !box) return;
+  var cur = 0, timer;
+
+  /* Pull the hero up to the very top of the page, under the header */
+  function fit() {
+    hero.style.marginTop = '0px';
+    var top = hero.getBoundingClientRect().top + window.pageYOffset;
+    hero.style.marginTop = (-top) + 'px';
+  }
+  fit();
+  addEventListener('load', fit);
+  addEventListener('resize', fit);
+
+  if (!document.querySelector('.hero-slide.is-active')) {
+    slides[0].classList.add('is-active');
+  }
+
+  slides.forEach(function (_, i) {
+    var b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'hero-dot' + (i === 0 ? ' is-active' : '');
+    b.setAttribute('aria-label', 'الشريحة ' + (i + 1));
+    b.addEventListener('click', function () { go(i); play(); });
+    box.appendChild(b);
+  });
+
+  function go(n) {
+    var dots = box.children;
+    slides[cur].classList.remove('is-active');
+    dots[cur].classList.remove('is-active');
+    cur = (n + slides.length) % slides.length;
+    slides[cur].classList.add('is-active');
+    dots[cur].classList.add('is-active');
+  }
+
+  function play() {
+    clearInterval(timer);
+    if (slides.length < 2) return;
+    if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    timer = setInterval(function () { go(cur + 1); }, 6500);
+  }
+
+  hero.addEventListener('mouseenter', function () { clearInterval(timer); });
+  hero.addEventListener('mouseleave', play);
+  play();
+})();
+</script>
