@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>إميلي برونتي on الرف العتيق</title>
+    <link>http://localhost:1313/writers/%D8%A5%D9%85%D9%8A%D9%84%D9%8A-%D8%A8%D8%B1%D9%88%D9%86%D8%AA%D9%8A/</link>
+    <description>Recent content in إميلي برونتي on الرف العتيق</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ar</language>
+    <copyright>© 2026 الرف العتيق</copyright>
+    <lastBuildDate>Wed, 28 Oct 2026 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/writers/%D8%A5%D9%85%D9%8A%D9%84%D9%8A-%D8%A8%D8%B1%D9%88%D9%86%D8%AA%D9%8A/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>مرتفعات ويذرينغ</title>
+      <link>http://localhost:1313/books/book-009/</link>
+      <pubDate>Wed, 28 Oct 2026 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/books/book-009/</guid>
+      <description>إميلي برونتي · 45 ريال</description>
+      
+    </item>
+    
+  </channel>
+</rss>

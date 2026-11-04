@@ -1,24 +1,29 @@
 [[main]]
   name = 'الكتب'
-  pageRef = 'books'
+  url = '/books/'
   weight = 10
 
 [[main]]
   name = 'التصنيفات'
-  pageRef = 'categories'
+  url = '/categories/'
   weight = 20
 
 [[main]]
-  name = 'المدونة'
-  pageRef = 'posts'
+  name = 'المؤلفون'
+  url = '/writers/'
   weight = 30
 
 [[main]]
-  name = 'من نحن'
-  pageRef = 'about'
+  name = 'المدونة'
+  url = '/posts/'
   weight = 40
 
 [[main]]
-  name = 'تواصل معنا'
-  pageRef = 'contact'
+  name = 'من نحن'
+  url = '/about/'
   weight = 50
+
+[[main]]
+  name = 'تواصل معنا'
+  url = '/contact/'
+  weight = 60

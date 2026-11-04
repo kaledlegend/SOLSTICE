@@ -1,11 +1,16 @@
 {{ $p := .Page.Params }}
 {{ $wa := site.Params.whatsapp }}
+{{ $author := "" }}
+{{ with $p.writers }}{{ $author = index . 0 }}{{ else }}{{ with $p.bookauthor }}{{ $author = . }}{{ end }}{{ end }}
+{{ $term := "" }}
+{{ if $author }}{{ $term = site.GetPage (printf "/writers/%s" ($author | urlize)) }}{{ end }}
 <div class="book-info">
   <div class="book-row">
-    {{ with $p.bookauthor }}<div><span>المؤلف</span><b>{{ . }}</b></div>{{ end }}
+    {{ if $author }}<div><span>المؤلف</span><b>{{ if $term }}<a href="{{ $term.RelPermalink }}">{{ $author }}</a>{{ else }}{{ $author }}{{ end }}</b></div>{{ end }}
     {{ with $p.condition }}<div><span>الحالة</span><b>{{ . }}</b></div>{{ end }}
     {{ with $p.year }}<div><span>سنة الطباعة</span><b>{{ . }}</b></div>{{ end }}
     {{ with $p.publisher }}<div><span>دار النشر</span><b>{{ . }}</b></div>{{ end }}
+    {{ with $p.copies }}{{ if gt (int .) 1 }}<div><span>النسخ المتوفرة</span><b>{{ . }}</b></div>{{ end }}{{ end }}
   </div>
   <div class="book-buy">
     {{ if $p.price }}<div class="book-price">{{ $p.price }} <small>ريال</small></div>{{ end }}
