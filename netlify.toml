@@ -1,8 +1,17 @@
 [build]
-  command = "hugo --gc --minify"
+  command = "bash scripts/build.sh"
   publish = "public"
 
 [build.environment]
-  HUGO_VERSION = "0.152.2"
+  # The Blowfish theme requires Hugo >= 0.164.0 and <= 0.167.0 (extended).
+  # scripts/build.sh downloads this exact version if the build image lacks it.
+  HUGO_VERSION = "0.165.0"
   HUGO_ENV = "production"
-  HUGO_ENABLEGITINFO = "true"
+
+# Deploy previews and branch deploys live on their own URLs, so build them
+# with the matching base URL to keep links and assets working.
+[context.deploy-preview]
+  command = "BASE_URL=$DEPLOY_PRIME_URL/ bash scripts/build.sh"
+
+[context.branch-deploy]
+  command = "BASE_URL=$DEPLOY_PRIME_URL/ bash scripts/build.sh"
